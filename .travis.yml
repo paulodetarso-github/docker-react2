@@ -1,0 +1,12 @@
+language: generic
+# Precisaremos de permissão de superusuário para executar o docker
+sudo: required
+# Pedindo pra instalar o docker no container
+services:
+  - docker
+
+before_install:
+  - docker build -t paulodetarso/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true paulodetarso/docker-react npm run test
